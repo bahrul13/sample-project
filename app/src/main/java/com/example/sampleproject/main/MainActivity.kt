@@ -1,4 +1,4 @@
-package com.example.sampleproject
+package com.example.sampleproject.main
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,22 +9,34 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
+import com.example.sampleproject.R
 import com.example.sampleproject.databinding.ActivityMainBinding
+import com.example.sampleproject.main.firstfragment.FirstFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private val viewModel by viewModels<MainViewModel>()
+    private val navController by lazy { findNavController(R.id.nav_host_fragment_content_main) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+
+
+        viewModel.navigation.observe(this) { fragmentNavigation ->
+            if(fragmentNavigation == null) return@observe
+                    navController.navigate(fragmentNavigation.navigationId)
+        }
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -55,4 +67,8 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+}
+enum class FragmentNavigation(val navigationId: Int) {
+    FirstFragment(R.id.FirstFragment),
+    SecondFragment(R.id.SecondFragment)
 }

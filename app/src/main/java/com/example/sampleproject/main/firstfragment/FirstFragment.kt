@@ -26,6 +26,7 @@ class FirstFragment : Fragment() {
     private val viewModel by activityViewModels<MainViewModel>()
     private val firstViewModel by viewModels<FirstViewModel>()
 
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -54,13 +55,23 @@ class FirstFragment : Fragment() {
                 "${user.firstName} ${user.lastName}"
             }
         }
+        firstViewModel.characterList.observe(this.viewLifecycleOwner) { characters->
+            characters.forEach{ info ->
+                println("${info.id} - ${info.name} - ${info.status}")
+            }
 
+        }
         binding.buttonFirst.setOnClickListener {
+
+            lifecycleScope.launch {
+                firstViewModel.getCharacters()
+            }
+
 //            findNavController().navigate(R.id.action_ThirdFragment_to_FirstFragment)
 //            binding.textviewFirst.text = "Hello World!"
 
 //            viewModel.navigateToSecond()
-        firstViewModel.changeFirstText("Hello World!")
+//        firstViewModel.changeFirstText("Hello World!")
 
         }
 

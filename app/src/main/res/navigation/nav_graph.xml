@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/ThirdFragment"
-        android:name="com.example.sampleproject.ThirdFragment"
+        android:name="com.example.sampleproject.main.thirdfragment.ThirdFragment"
         android:label="Third Fragment"
         tools:layout="layout/fragment_third">
 

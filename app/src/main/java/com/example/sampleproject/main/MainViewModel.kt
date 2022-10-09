@@ -15,4 +15,8 @@ class MainViewModel : ViewModel(){
     fun navigateToSecond() {
         navigation.value = FragmentNavigation.SecondFragment
     }
+
+    fun navigateToThird() {
+        navigation.value = FragmentNavigation.ThirdFragment
+    }
 }

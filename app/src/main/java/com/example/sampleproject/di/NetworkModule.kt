@@ -1,6 +1,6 @@
 package com.example.sampleproject.di
 
-import com.example.sampleproject.data.remote.RIckAndMortyService
+import com.example.sampleproject.data.remote.RickAndMortyService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -39,7 +39,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun providesRickAndMortyService(retrofit: Retrofit): RIckAndMortyService =
-        retrofit.create(RIckAndMortyService::class.java)
+    fun providesRickAndMortyService(retrofit: Retrofit): RickAndMortyService =
+        retrofit.create(RickAndMortyService::class.java)
 
 }
